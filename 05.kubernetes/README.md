@@ -138,3 +138,39 @@ watch -n 0.1 curl http://34.66.241.150:8100/currency-conversion-feign/from/USD/t
 docker push in28min/mmv2-currency-conversion-service:0.0.12-SNAPSHOT
 docker push in28min/mmv2-currency-exchange-service:0.0.12-SNAPSHOT
 ```
+Docker image build
+```
+mvn spring-boot:build-image -DskipTests
+```
+
+run container
+```
+docker pull in28min/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+
+docker pull in28min/mmv2-currency-conversion-service:0.0.11-SNAPSHOT
+
+
+docker run -p 8000:8000 in28min/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+
+docker run -p 8001:8001 in28min/mmv2-currency-conversion-service:0.0.11-SNAPSHOT
+```
+
+Kubernetes commands 
+```
+gcloud auth login
+
+kubectl version
+
+kubectl create deployment currency-exchange --image=in28min/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+
+kubectl exposr deployment currency-exchange --type=LoadBalancer --port=8000
+
+kubectl scv
+kubectl services
+kubectl pods
+kubectl replicaset
+```
+Form yml
+```
+kubectl apply -f deployment.yaml
+```
